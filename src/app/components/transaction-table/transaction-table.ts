@@ -21,7 +21,7 @@ export class TransactionTable implements OnInit {
   sortColumn: keyof Transaction = 'date';
   sortAscending = true;
 
-  private apiUrl = 'http://localhost:8080/api/transactions';
+  private apiUrl = 'https://ledgerbackend-pwc4.onrender.com/api/transactions';
 
   constructor(private http: HttpClient, private cdr: ChangeDetectorRef) {}
 
