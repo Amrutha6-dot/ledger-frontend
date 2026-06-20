@@ -1,0 +1,51 @@
+<div class="form-container">
+  <h2>Add Transaction</h2>
+  <div class="form-row">
+    <input [(ngModel)]="newTransaction.date" type="date" placeholder="Date" />
+    <input [(ngModel)]="newTransaction.description" type="text" placeholder="Description" />
+    <input [(ngModel)]="newTransaction.category" type="text" placeholder="Category" />
+    <input [(ngModel)]="newTransaction.amount" type="number" placeholder="Amount" />
+    <select [(ngModel)]="newTransaction.type">
+      <option value="credit">Credit</option>
+      <option value="debit">Debit</option>
+    </select>
+    <button (click)="addTransaction()">Add</button>
+  </div>
+</div>
+
+<div class="filter-bar" *ngIf="transactions.length > 0">
+  <label for="categoryFilter">Filter by Category:</label>
+  <select id="categoryFilter" name="categoryFilter" [(ngModel)]="selectedCategory">
+    <option value="All">All</option>
+    <option *ngFor="let cat of uniqueCategories" [value]="cat">{{ cat }}</option>
+  </select>
+</div>
+
+<div class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th (click)="sortBy('date')">Date</th>
+        <th (click)="sortBy('description')">Description</th>
+        <th (click)="sortBy('category')">Category</th>
+        <th (click)="sortBy('amount')">Amount</th>
+        <th (click)="sortBy('type')">Type</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let txn of filteredTransactions">
+        <td>{{ txn.date }}</td>
+        <td>{{ txn.description }}</td>
+        <td>{{ txn.category }}</td>
+        <td>
+          <span [class.credit]="txn.type === 'credit'" [class.debit]="txn.type === 'debit'">
+            {{ txn.type === 'debit' ? '-' : '+' }}${{ txn.amount.toFixed(2) }}
+          </span>
+        </td>
+        <td>{{ txn.type }}</td>
+        <td><button class="delete-btn" (click)="deleteTransaction(txn.id)">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

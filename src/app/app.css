@@ -1,0 +1,86 @@
+.page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 48px 24px;
+  font-family: 'Inter', -apple-system, sans-serif;
+}
+
+h1 {
+  font-size: 32px;
+  color: #1A2332;
+  margin-bottom: 4px;
+}
+
+.subtitle {
+  color: #5C6670;
+  margin-bottom: 32px;
+}
+.page-header {
+  margin-bottom: 8px;
+}
+
+.summary-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.card {
+  background: #FFFFFF;
+  border: 2px solid #1A2332;
+  border-radius: 10px;
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.card-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #5C6670;
+  font-weight: 500;
+}
+
+.card-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1A2332;
+}
+
+.card.income .card-value { color: #1E8449; }
+.card.expenses .card-value { color: #C0392B; }
+.card.positive .card-value { color: #1E8449; }
+.card.negative .card-value { color: #C0392B; }
+
+.filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.filter-bar label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1A2332;
+}
+
+.filter-bar select {
+  padding: 8px 14px;
+  border: 2px solid #1A2332;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #1A2332;
+  background: #FFFFFF;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.filter-bar select:focus {
+  border-color: #D97D26;
+}
