@@ -46,17 +46,25 @@ export class TransactionTable implements OnInit {
   constructor(private http: HttpClient, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
-    this.loadTransactions();
-  }
+  this.transactions = MOCK_TRANSACTIONS;
+  this.cdr.detectChanges();
+  // this.loadTransactions();   // comment this out temporarily
+}
 
-  loadTransactions(): void {
-    this.http.get<Transaction[]>(this.apiUrl).pipe(
-      catchError(() => of(MOCK_TRANSACTIONS))
-    ).subscribe((data) => {
-      this.transactions = data;
+ loadTransactions(): void {
+  this.http.get<Transaction[]>(this.apiUrl).pipe(
+    catchError(() => of(MOCK_TRANSACTIONS))
+  ).subscribe({
+    next: (data) => {
+      this.transactions = data && data.length > 0 ? data : MOCK_TRANSACTIONS;
       this.cdr.detectChanges();
-    });
-  }
+    },
+    error: () => {
+      this.transactions = MOCK_TRANSACTIONS;
+      this.cdr.detectChanges();
+    }
+  });
+}
 
   addTransaction(): void {
     if (!this.newTransaction.description || !this.newTransaction.amount) {
